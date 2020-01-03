@@ -4,7 +4,10 @@
 
 
 
-This is a Pytorch implementation of the Learning Neural Causal Models from Unknown Interventions paper. Here we learn the causal model based on a meta-learning transfer objective from unknown intervention data. Please cite:
+This is a Pytorch implementation of the [Learning Neural Causal Models from Unknown Interventions](https://arxiv.org/abs/1910.01075) paper. Here we learn the causal model based on a meta-learning transfer objective from unknown intervention data. Please cite:
+
+[Nan Rosemary Ke](https://nke001.github.io/)\*, [Olexa Bilaniuk](https://mila.quebec/en/person/olexa-bilaniuk/)\*, [Anirudh Goyal](https://anirudh9119.github.io/), [Stefan Bauer](https://www.is.mpg.de/~sbauer), [Hugo Larochelle](https://mila.quebec/en/person/hugo-larochelle/), [Chris Pal](https://mila.quebec/en/person/pal-christopher/), [Yoshua Bengio](https://mila.quebec/en/yoshua-bengio/)
+
 
     @article{ke2019learning,
         title={Learning Neural Causal Models from Unknown Interventions},
@@ -32,16 +35,16 @@ conda env create -f environment.yml
 
 ```
 # chain3
-python run.py train --seed 1 --pretrain 10000 --mopt adam:5e-2,0.9 --gopt adam:5e-3,0.1 -v 500 --lsparse 0.1 --bs 256 --ldag 0.5 --predict 100 --temperature 1 -N 2 -p chain3
+python run.py train --seed 1 --train_functional 10000 --mopt adam:5e-2,0.9 --gopt adam:5e-3,0.1 -v 500 --lsparse 0.1 --bs 256 --ldag 0.5 --predict 100 --temperature 1 -N 2 -p chain3
 
 # fork3
-python run.py train --seed 1 --pretrain 10000 --mopt adam:5e-2,0.9 --gopt adam:5e-3,0.1 -v 500 --lsparse 0.1 --bs 256 --ldag 0.5 --predict 100 --temperature 1 -N 2 -p fork3
+python run.py train --seed 1 --train_functional 10000 --mopt adam:5e-2,0.9 --gopt adam:5e-3,0.1 -v 500 --lsparse 0.1 --bs 256 --ldag 0.5 --predict 100 --temperature 1 -N 2 -p fork3
 
 # collider3
-python run.py train --seed 1 --pretrain 10000 --mopt adam:5e-2,0.9 --gopt adam:5e-3,0.1 -v 500 --lsparse 0.1 --bs 256 --ldag 0.5 --predict 100 --temperature 1 -N 2 -p collider3
+python run.py train --seed 1 --train_functional 10000 --mopt adam:5e-2,0.9 --gopt adam:5e-3,0.1 -v 500 --lsparse 0.1 --bs 256 --ldag 0.5 --predict 100 --temperature 1 -N 2 -p collider3
 
 # confounder3
-python run.py train --seed 1 --pretrain 10000 --mopt adam:5e-2,0.9 --gopt adam:5e-3,0.1 -v 500 --lsparse 0.1 --bs 256 --ldag 0.5 --predict 100 --temperature 1 -N 2 -p confounder3
+python run.py train --seed 1 --train_functional 10000 --mopt adam:5e-2,0.9 --gopt adam:5e-3,0.1 -v 500 --lsparse 0.1 --bs 256 --ldag 0.5 --predict 100 --temperature 1 -N 2 -p confounder3
 ```
 
 
@@ -63,3 +66,4 @@ python run.py train --seed 1 --pretrain 10000 --mopt adam:5e-2,0.9 --gopt adam:5
 
 `-p` specifies, by name, one of several `--graph` presets for groundtruth causal graphs (e.g. `chain3`).
 
+`--train_functional` specifies how many iterations to train the functional parameters.
