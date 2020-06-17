@@ -1,0 +1,27 @@
+/**
+ * Trivial dataset.
+ */
+
+network unknown {}
+
+variable Even      { type discrete [ 2 ] { False, True }; }
+variable Uncommon  { type discrete [ 2 ] { False, True }; }
+variable Rare      { type discrete [ 2 ] { False, True }; }
+variable SuperRare { type discrete [ 2 ] { False, True }; }
+variable UltraRare { type discrete [ 2 ] { False, True }; }
+
+probability ( Even ) {
+  table 0.5, 0.5;
+}
+probability ( Uncommon ) {
+  table 0.9,          1e-1;
+}
+probability ( Rare ) {
+  table 0.999,        1e-3;
+}
+probability ( SuperRare ) {
+  table 0.999999,     1e-6;
+}
+probability ( UltraRare ) {
+  table 0.99999999,   1e-8;
+}

@@ -1,0 +1,61 @@
+diff -ru a/ADTree/mkADTree.c b/ADTree/mkADTree.c
+--- a/ADTree/mkADTree.c	2007-02-09 02:55:42.000000000 -0500
++++ b/ADTree/mkADTree.c	2019-09-17 19:48:53.000000000 -0400
+@@ -39,7 +39,7 @@
+ 	 *** DATA MUST LIE IN THE RANGE 1..K *** */
+ 	
+ 	double *tarity;
+-	unsigned int *ptr;
++	unsigned long *ptr;
+ 	int *records;
+ 	double *flatData;
+ 	int ci,ri;
+@@ -98,9 +98,9 @@
+ 	mxFree(arity);
+ 	mxFree(data);
+ 	
+-	plhs[0] = mxCreateNumericMatrix( 1, 1, mxUINT32_CLASS, 0 );
+-	ptr = ((unsigned int *)mxGetData(plhs[0]));
+-	ptr[0] = (unsigned int)root;
++	plhs[0] = mxCreateNumericMatrix( 1, 1, mxUINT64_CLASS, 0 );
++	ptr = ((unsigned long*)mxGetData(plhs[0]));
++	ptr[0] = (unsigned long)root;
+ }
+ 
+ ADTreeNode *mkADTree( int nodeI, int count, int *records, int dp) {
+diff -ru a/ADTree/mkContab.c b/ADTree/mkContab.c
+--- a/ADTree/mkContab.c	2007-02-09 20:06:02.000000000 -0500
++++ b/ADTree/mkContab.c	2019-09-17 19:48:53.000000000 -0400
+@@ -27,7 +27,7 @@
+ 	int maxArity;
+ 	int ci, vi;
+ 	int prod;
+-	unsigned int *rootPtr;
++	unsigned long *rootPtr;
+ 	double *queryPtr;
+ 	double t1, t2;
+ 		
+@@ -35,7 +35,7 @@
+ 		mexErrMsgTxt("usage: mkADTree( data, queryVars, arities)");
+ 	}
+ 	
+-	rootPtr = (unsigned int*)mxGetData(prhs[0]);
++	rootPtr = (unsigned long*)mxGetData(prhs[0]);
+ 	root = (ADTreeNode*)rootPtr[0];
+ 	
+ 	nNodes = root->nChildren;
+diff -ru a/ADTree/testADTree.c b/ADTree/testADTree.c
+--- a/ADTree/testADTree.c	2007-02-09 20:18:24.000000000 -0500
++++ b/ADTree/testADTree.c	2019-09-17 19:48:53.000000000 -0400
+@@ -46,9 +46,9 @@
+ void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
+ 	/* expects a pointer to the root */
+ 	
+-	unsigned int *ptr;
++	unsigned long *ptr;
+ 
+-	ptr = (unsigned int*)mxGetData(prhs[0]);
++	ptr = (unsigned long*)mxGetData(prhs[0]);
+ 	root = (ADTreeNode *)ptr[0];
+ 
+ 	traverseAD(root, 0);
