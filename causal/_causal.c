@@ -2399,6 +2399,7 @@ static PyModuleDef _causal_MODULE_DEF = {
 PyMODINIT_FUNC PyInit__causal(void){
     PyObject* m;
     
+    #if !defined(__APPLE__) || (__clang_major__ > 8)
     /* Check CPU features */
     __builtin_cpu_init();
     if(!__builtin_cpu_supports("sse")  ||
@@ -2409,6 +2410,7 @@ PyMODINIT_FUNC PyInit__causal(void){
         PyErr_SetString(PyExc_ImportError, "Rejecting load of the module \"causal._causal\" on this CPU. Requires SSE, SSE2, AVX, AVX2 and FMA enabled.");
         return NULL;
     }
+    #endif
     
     
     /* Initialize module-private PRNG */
